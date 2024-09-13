@@ -31,3 +31,16 @@ console.log(displayProductDetails(objectFake));
 
 //logging array inventory to test compataiblity with function
 // console.log (displayProductDetails(inventory)); //output not correct
+
+//task 3 create function to update product stock after sales
+
+//requirements write function that accepts product object and number "unitsSold" - "unitsSoldcurrentquantity" function should log product stock status.
+
+function updateStock (product, unitsSold,){
+    let newQuantity =(product.quantity -= unitsSold);
+    const stockLevel = newQuantity <= unitsSold ? "No Stock" : "Low Stock";
+return displayProductDetails(product); }
+
+console.log("Inventory Update" ,updateStock(objectFake, 2)); //Sold Two products and updated Stock Status
+
+//console.log("Stock Status Update Question" ,updateStock(objectFake, 5)); //test
