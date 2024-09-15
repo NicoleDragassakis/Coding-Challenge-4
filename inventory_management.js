@@ -38,9 +38,20 @@ console.log(displayProductDetails(objectFake));
 
 function updateStock (product, unitsSold,){
     let newQuantity =(product.quantity -= unitsSold);
-    const stockLevel = newQuantity <= unitsSold ? "No Stock" : "Low Stock";
+    const stockLevel = newQuantity <= 0 ? "No Stock" : newQuantity <= product.lowStockLevel ? "Low Stock": 
+    console.log("Updated Stock", stockLevel);
 return displayProductDetails(product); }
 
 console.log("Inventory Update" ,updateStock(objectFake, 2)); //Sold Two products and updated Stock Status
 
 //console.log("Stock Status Update Question" ,updateStock(objectFake, 5)); //test
+
+//task 4 create a function to check low stock products
+
+function checkLowStock (inventory){
+    const lowStockProducts = inventory.filter(product => product.quantity <= product.lowStockLevel); //filters out the products which do not meet requirement
+    lowStockProducts.forEach(product => {
+       console.log("Low Stock Items:", `${product.name}: Quantity: ${product.quantity}`); //output "camera: 1"
+    });
+}
+checkLowStock(inventory); //calls function
