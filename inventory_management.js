@@ -2,7 +2,8 @@
 
 //Task 1 inventory array of product objects
 
-console.log("Task One"); //for better readability on the console.
+console.log("TASK ONE"); //for better readability on the console.
+
 const inventory =[ 
 {name: "monitor", price: 150.00, quantity: 4, lowStockLevel: 2},
 {name: "radio", price: 50.00, quantity: 10, lowStockLevel: 1},
@@ -16,10 +17,10 @@ console.log (inventory); //consoling to test array
 
 //directions Write a function named displayProductDetails that accepts a product object and logs the product’s name, price, quantity in stock, and stock status 
 
-console.log("Task Two"); //for better readability on the console.
+console.log("TASK TWO"); //for better readability on the console.
 
 function displayProductDetails(product){
-    let { name, price, quantity, lowStockLevel} = product;
+    const { name, price, quantity, lowStockLevel} = product;
    
     const stockLevel = quantity <= lowStockLevel ? "Low Stock" : "In Stock"; //calculate stock status
     //log details ..return isnt working??
@@ -28,7 +29,7 @@ function displayProductDetails(product){
     console.log("Pirce:",(price));
     console.log("Quantity:", (quantity));
     console.log("Stock Status", (stockLevel));
-    return { stockLevel };
+    return { name, price, quantity, stockLevel };
 
 }
 let objectFake = { name: "monitor", price: 150.00, quantity: 4, lowStockLevel: 2}; //example object to test function
@@ -41,7 +42,7 @@ console.log(displayProductDetails(objectFake));
 
 //requirements write function that accepts product object and number "unitsSold" - "unitsSoldcurrentquantity" function should log product stock status.
 
-console.log("Task Three"); //for better readability on the console.
+console.log("TASK THREE"); //for better readability on the console.
 
 function updateStock (product, unitsSold,){
     let newQuantity =(product.quantity -= unitsSold);
@@ -55,7 +56,7 @@ console.log("Inventory Update" ,updateStock(objectFake, 2)); //Sold Two products
 
 //task 4 create a function to check low stock products
 
-console.log("Task Four"); //for better readability on the console.
+console.log("TASK FOUR"); //for better readability on the console.
 
 function checkLowStock (inventory){
     const lowStockProducts = inventory.filter(product => product.quantity <= product.lowStockLevel); //filters out the products which do not meet requirement
@@ -69,7 +70,7 @@ checkLowStock(inventory); //calls function outputs Low Stock Items: camera: Quan
 
 //requirements: function calculateinventoryValue iterates over inventory and returns the total value value is calc by price times quantity use reduce()
 
-console.log("Task Five"); //for better readability on the console.
+console.log("TASK FIVE"); //for better readability on the console.
 
 function calculateInventoryValue(inventory){
     return inventory.reduce((accumulator, product) => { //accumulator changes starting from 0 each time .reduce itterates over the array
@@ -82,8 +83,19 @@ console.log("Total Inventory Value" ,calculateInventoryValue(inventory)); //outp
 
 //requirements function named processSale that accepts product.name and uunitssold to find the product by name, if found call updatestock to reduce quantity if not found log error message.
 
-console.log("Task Six"); //for better readability on the console.
+console.log("TASK SIX"); //for better readability on the console.
 
-function processSale (){
 
-}
+function processSale (inventory, productName, unitsSold){
+   const product = inventory.find(product => product.name===productName);
+   if (product){
+    const updateQuantity = updateStock(inventory, productName, unitsSold);
+    return updateQuantity;
+   } else{
+    console.log("Error: Product Does Not Exist.");
+    return inventory;
+   }
+    }
+console.log(processSale(inventory, "monitor", 1)); //test function
+console.log(processSale(inventory,"keyboard", 1)); //test if error displays
+
